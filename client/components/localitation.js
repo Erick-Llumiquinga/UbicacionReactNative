@@ -5,10 +5,10 @@ const url = "http://192.168.100.12:3000/server/ubication"
 
 export default class Localitation extends Component {
 
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
-      nombre: null
+      nombre: 'Default'
     }
   }
 
@@ -20,7 +20,7 @@ export default class Localitation extends Component {
       let data =  {
         fecha: fecha,
         ubicacion: `${latitud.toString()}, ${longitud.toString()}`,
-        user: 'Alejandro'
+        user: 'Erick'
       }
 
       const header = {
@@ -43,12 +43,16 @@ export default class Localitation extends Component {
     })
   }
 
+  handleNombre = text => {
+    this.setState({ nombre: text });
+  }
+
   render(){
     return(
       <View style={styles.container}>
         <View>
           <Text>Ingresa tu nombre</Text>
-          <TextInput style={{ height: 50}} onChangeText={(text)=>{this.setState({nombre: text})}}/>
+            <TextInput style={{ height: 50}} onChangeText={this.handleNombre} placeholder='Nombre'/>
         </View>
           <Button title="Ubicación" style={styles.boton} onPress={this.getLocalitation}/>
       </View>
